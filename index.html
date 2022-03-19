@@ -20,7 +20,7 @@
       <header>
         <div class="container react" id="header">
           <div>
-            <img class="logo" src="images/logo.svg" alt="Logo" />
+            <img class="logo" v-bind:src="logo" alt="Logo" />
           </div>
           <div class="textRight">
             <img src="images/vue.svg" alt="Vue" class="vueLogo" /><strong
@@ -39,15 +39,10 @@
             <div class="icecream " id="icecream">
               <p class="cone"></p>
               <!-- <p>Please start adding scoops</p> -->
-              <div class="scoop chocolate"></div>
-              <div class="scoop vanilla"></div>
-              <div class="scoop orange"></div>
-              <div class="scoop strawberry"></div>
-              <div class="scoop chocolate"></div>
-              <div class="scoop vanilla " id="scoop"></div>
-              <div class="scoop lemon"></div>
-              <div class="cherry" ></div>
-              <div class="question"  ></div>
+              <div class="scoop" v-for="cartItem in cart" :class="cartItem.name.toLowerCase()"></div>
+             
+              <div class="cherry" v-if="cart.length> 0"></div>
+              <div class="question" v-else ></div>
             </div>
           </div>
           <!-- ice cream end -->
@@ -55,44 +50,22 @@
           <!-- builder start -->
           <div class="" id="builder">
             <div class="builder">
-              <h3>Build your own Ice Cream Sundae</h3>
+              <h3>Build your cool Ice Cream
+                 <span class="quantity" :style="cart.length=== 0 ?{color:'red'}:{color:'green'}">{{cart.length}}</span>
+              </h3>
               <!-- items start -->
               <div class="" id="items">
                 <ul>
                   <!-- item start -->
-                  <li class=" item" id="item">
-                    <span>{{flavor}}</span>
-                    <span class="quantity">2</span>
+                  <li class="item" :key="flavor.id" v-for="flavor in flavors">
+                    <span>{{flavor.name}}</span>
+                   
                     <div class="right">
-                      <button type="button" class="plus rounded">+</button>
-                      <button type="button" class="minus rounded">-</button>
+                      <button type="button" class="plus rounded" v-on:click="addToCart(flavor.id)">+</button>
+                      <button type="button" class="minus rounded" @click="removeFromCart(flavor.id)">-</button>
                     </div>
                   </li>
-                  <!-- item end -->
-
-                  <li class="item">
-                    <span>Chocolate</span>
-                    <div class="right">
-                      <button type="button" class="plus rounded">+</button>
-                      <button type="button" class="minus rounded">-</button>
-                    </div>
-                  </li>
-
-                  <li class="item">
-                    <span>Strawberry</span>
-                    <div class="right">
-                      <button type="button" class="plus rounded">+</button>
-                      <button type="button" class="minus rounded">-</button>
-                    </div>
-                  </li>
-
-                  <li class="item">
-                    <span>Orange</span>
-                    <div class="right">
-                      <button type="button" class="plus rounded">+</button>
-                      <button type="button" class="minus rounded">-</button>
-                    </div>
-                  </li>
+                  <!-- item end -->              
                 </ul>
               </div>
               <!-- items end -->
@@ -100,7 +73,7 @@
               <!-- total price start -->
               <div class="total " id="total">
                 <div>Total Price</div>
-                <div>3000.00 Tk</div>
+                <div>{{total}} Tk</div>
               </div>
               <!-- total price end -->
               <button type="button" onclick="next()" class="order rounded">
@@ -180,6 +153,6 @@
     </div>
 
     <script src="./main.js"></script>
-    <script>const mountedapp=app.mount('#app');</script>
+    <script></script>
   </body>
 </html>

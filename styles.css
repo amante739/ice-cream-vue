@@ -194,6 +194,14 @@ div.scoop:first-of-type {
 .orange::after {
   background: orange;
 }
+.mango,
+.mango::after {
+  background: #ff7300;
+}
+.blackforest,
+.blackforest::after {
+  background: #442003;
+}
 
 .lemon,
 .lemon::after {
